@@ -4,6 +4,7 @@
   "documentation": "https://github.com/sudoxnym/saas",
   "issue_tracker": "https://github.com/sudoxnym/saas/issues",
   "dependencies": ["mqtt"],
-  "codeowners": ["@sudoxnym"]
-  "content_in_root": true
+  "codeowners": ["@sudoxnym"],
+  "content_in_root": true,
+  "render_readme": true
 }

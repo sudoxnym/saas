@@ -1,0 +1,75 @@
+{
+  "title": "SAAS - Sleep As Android Status",
+  "config": {
+    "step": {
+      "user": {
+        "title": "Konfiguration für SAAS - Sleep As Android Status",
+        "description": "Konfigurieren Sie die grundlegenden Einstellungen für die SAAS-Integration.",
+        "data": {
+          "name": "Name für Sensor",
+          "topic_template": "MQTT-Thema für Sleep As Android Ereignisse",
+          "qos": "Quality of Service (QoS) für MQTT",
+          "awake_duration": "Wachdauer",
+          "sleep_duration": "Schlafdauer",
+          "awake_states": "Wachzustände*",
+          "sleep_states": "Schlafzustände*"
+        }
+      }
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "SAAS-Integrationseinstellungen",
+        "description": "Konfigurieren Sie die grundlegenden Einstellungen für die SAAS-Integration.",
+        "data": {
+          "name": "Name für Sensor",
+          "topic_template": "MQTT-Thema (von Sleep As Android)",
+          "qos": "MQTT Quality of Service (QoS)",
+          "awake_duration": "Wachdauer",
+          "sleep_duration": "Schlafdauer",
+          "awake_states": "Wachzustände*",
+          "sleep_states": "Schlafzustände*"
+        }
+      }
+    }
+  },
+  "entity": {
+    "sensor": {
+      "state": {
+        "Unknown": "Unbekannt",
+        "Sleep Tracking Started": "Schlafüberwachung Gestartet",
+        "Sleep Tracking Stopped": "Schlafüberwachung Gestoppt",
+        "Sleep Tracking Paused": "Schlafüberwachung Pausiert",
+        "Sleep Tracking Resumed": "Schlafüberwachung Fortgesetzt",
+        "Alarm Snoozed": "Alarm Snoozed",
+        "Snooze Canceled": "Snooze Abgebrochen",
+        "Time for Bed": "Zeit fürs Bett",
+        "Alarm Alert Started": "Alarmalarm Gestartet",
+        "Alarm Dismissed": "Alarm Abgewiesen",
+        "Skip Next Alarm": "Nächsten Alarm Überspringen",
+        "Show Skip Next Alarm": "Zeige 'Nächsten Alarm Überspringen'",
+        "REM": "REM",
+        "Smart Period": "Intelligenter Zeitraum",
+        "Before Smart Period": "Vor Intelligenter Zeitraum",
+        "Lullaby Start": "Wiegenlied Start",
+        "Lullaby Stop": "Wiegenlied Stop",
+        "Lullaby Volume Down": "Wiegenlied Lautstärke Runter",
+        "Deep Sleep": "Tiefschlaf",
+        "Light Sleep": "Leichter Schlaf",
+        "Awake": "Wach",
+        "Not Awake": "Nicht Wach",
+        "Apnea Alarm": "Apnoe Alarm",
+        "Antisnoring": "Antischnarchen",
+        "Before Alarm": "Vor Alarm",
+        "Snore Detected": "Schnarchen Erkannt",
+        "Talk Detected": "Gespräch Erkannt",
+        "Cough Detected": "Husten Erkannt",
+        "Baby Cry Detected": "Babyweinen Erkannt",
+        "Laugh Detected": "Lachen Erkannt",
+        "Alarm Rescheduled": "Alarm Neu Geplant",
+        "None": "Keine"
+      }
+    }
+  }
+}

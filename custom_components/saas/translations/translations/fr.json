@@ -1,0 +1,75 @@
+{
+  "title": "SAAS - Statut de Sleep As Android",
+  "config": {
+    "step": {
+      "user": {
+        "title": "Configuration pour SAAS - Statut de Sleep As Android",
+        "description": "Configurez les paramètres de base pour l'intégration de SAAS.",
+        "data": {
+          "name": "Nom pour le Capteur",
+          "topic_template": "Sujet MQTT pour les Événements de Sleep As Android",
+          "qos": "Qualité de Service (QoS) pour MQTT",
+          "awake_duration": "Durée Éveillé",
+          "sleep_duration": "Durée Endormi",
+          "awake_states": "États Éveillé*",
+          "sleep_states": "États Endormi*"
+        }
+      }
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Paramètres d'Intégration SAAS",
+        "description": "Configurez les paramètres de base pour l'intégration de SAAS.",
+        "data": {
+          "name": "Nom pour le Capteur",
+          "topic_template": "Sujet MQTT (de Sleep As Android)",
+          "qos": "Qualité de Service (QoS) de MQTT",
+          "awake_duration": "Durée Éveillé",
+          "sleep_duration": "Durée Endormi",
+          "awake_states": "États Éveillé*",
+          "sleep_states": "États Endormi*"
+        }
+      }
+    }
+  },
+  "entity": {
+    "sensor": {
+      "state": {
+        "Unknown": "Inconnu",
+        "Sleep Tracking Started": "Suivi du Sommeil Commencé",
+        "Sleep Tracking Stopped": "Suivi du Sommeil Arrêté",
+        "Sleep Tracking Paused": "Suivi du Sommeil en Pause",
+        "Sleep Tracking Resumed": "Suivi du Sommeil Repris",
+        "Alarm Snoozed": "Alarme en Snooze",
+        "Snooze Canceled": "Snooze Annulé",
+        "Time for Bed": "Heure du Coucher",
+        "Alarm Alert Started": "Alerte d'Alarme Commencée",
+        "Alarm Dismissed": "Alarme Dismissed",
+        "Skip Next Alarm": "Passer la Prochaine Alarme",
+        "Show Skip Next Alarm": "Montrer Passer la Prochaine Alarme",
+        "REM": "REM",
+        "Smart Period": "Période Intelligente",
+        "Before Smart Period": "Avant la Période Intelligente",
+        "Lullaby Start": "Début de Berceuse",
+        "Lullaby Stop": "Fin de Berceuse",
+        "Lullaby Volume Down": "Diminuer le Volume de la Berceuse",
+        "Deep Sleep": "Sommeil Profond",
+        "Light Sleep": "Sommeil Léger",
+        "Awake": "Éveillé",
+        "Not Awake": "Pas Éveillé",
+        "Apnea Alarm": "Alarme d'Apnée",
+        "Antisnoring": "Anti-ronflement",
+        "Before Alarm": "Avant l'Alarme",
+        "Snore Detected": "Ronflement Détecté",
+        "Talk Detected": "Parole Détectée",
+        "Cough Detected": "Toux Détectée",
+        "Baby Cry Detected": "Pleurs de Bébé Détectés",
+        "Laugh Detected": "Rire Détecté",
+        "Alarm Rescheduled": "Alarme Re-programmée",
+        "None": "Aucun"
+      }
+    }
+  }
+}

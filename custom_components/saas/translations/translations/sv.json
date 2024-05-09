@@ -1,0 +1,75 @@
+{
+  "title": "SAAS - Sleep As Android Status",
+  "config": {
+    "step": {
+      "user": {
+        "title": "Konfiguration för SAAS - Sleep As Android Status",
+        "description": "Konfigurera de grundläggande inställningarna för SAAS-integrationen.",
+        "data": {
+          "name": "Namn för Sensor",
+          "topic_template": "MQTT Ämne för Sleep As Android Händelser",
+          "qos": "Kvalitet på Tjänst (QoS) för MQTT",
+          "awake_duration": "Vaken Varaktighet",
+          "sleep_duration": "Sovande Varaktighet",
+          "awake_states": "Vakna Tillstånd*",
+          "sleep_states": "Sovande Tillstånd*"
+        }
+      }
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "SAAS Integrationsinställningar",
+        "description": "Konfigurera de grundläggande inställningarna för SAAS-integrationen.",
+        "data": {
+          "name": "Namn för Sensor",
+          "topic_template": "MQTT Ämne (från Sleep As Android)",
+          "qos": "MQTT Kvalitet på Tjänst (QoS)",
+          "awake_duration": "Vaken Varaktighet",
+          "sleep_duration": "Sovande Varaktighet",
+          "awake_states": "Vakna Tillstånd*",
+          "sleep_states": "Sovande Tillstånd*"
+        }
+      }
+    }
+  },
+  "entity": {
+    "sensor": {
+      "state": {
+        "Unknown": "Okänd",
+        "Sleep Tracking Started": "Sömnmätning Startad",
+        "Sleep Tracking Stopped": "Sömnmätning Stoppad",
+        "Sleep Tracking Paused": "Sömnmätning Pausad",
+        "Sleep Tracking Resumed": "Sömnmätning Återupptagen",
+        "Alarm Snoozed": "Alarm Snoozed",
+        "Snooze Canceled": "Snooze Avbruten",
+        "Time for Bed": "Dags att Gå och Lägga Sig",
+        "Alarm Alert Started": "Alarmvarning Startad",
+        "Alarm Dismissed": "Alarm Avvisat",
+        "Skip Next Alarm": "Hoppa över Nästa Alarm",
+        "Show Skip Next Alarm": "Visa 'Hoppa över Nästa Alarm'",
+        "REM": "REM",
+        "Smart Period": "Smart Period",
+        "Before Smart Period": "Före Smart Period",
+        "Lullaby Start": "Vaggvisa Start",
+        "Lullaby Stop": "Vaggvisa Stopp",
+        "Lullaby Volume Down": "Vaggvisa Volym Ner",
+        "Deep Sleep": "Djup Sömn",
+        "Light Sleep": "Lätt Sömn",
+        "Awake": "Vaken",
+        "Not Awake": "Inte Vaken",
+        "Apnea Alarm": "Apné Alarm",
+        "Antisnoring": "Antisnarkning",
+        "Before Alarm": "Före Alarm",
+        "Snore Detected": "Snarkning Upptäckt",
+        "Talk Detected": "Prat Upptäckt",
+        "Cough Detected": "Hosta Upptäckt",
+        "Baby Cry Detected": "Bebisgråt Upptäckt",
+        "Laugh Detected": "Skratt Upptäckt",
+        "Alarm Rescheduled": "Alarm Omplanerat",
+        "None": "Ingen"
+      }
+    }
+  }
+}

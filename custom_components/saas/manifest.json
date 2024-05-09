@@ -9,5 +9,6 @@
   "issue_tracker": "",
   "quality_scale": "silver",
   "requirements": ["pyhaversion", "paho-mqtt"],
-  "version": "0.0.1"
+  "version": "0.0.1",
+  "icon": "icon.png"
 }

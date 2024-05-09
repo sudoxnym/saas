@@ -1,0 +1,75 @@
+{
+    "title": "SAAS - Status do Sleep As Android",
+    "config": {
+      "step": {
+        "user": {
+          "title": "Configuração para SAAS - Status do Sleep As Android",
+          "description": "Configure as configurações básicas para a integração SAAS.",
+          "data": {
+            "name": "Nome para Sensor",
+            "topic_template": "Tópico MQTT para Eventos do Sleep As Android",
+            "qos": "Qualidade de Serviço (QoS) para MQTT",
+            "awake_duration": "Duração Acordado",
+            "sleep_duration": "Duração Adormecido",
+            "awake_states": "Estados Acordado*",
+            "sleep_states": "Estados Adormecido*"
+          }
+        }
+      }
+    },
+    "options": {
+      "step": {
+        "init": {
+          "title": "Configurações de Integração SAAS",
+          "description": "Configure as configurações básicas para a integração SAAS.",
+          "data": {
+            "name": "Nome para Sensor",
+            "topic_template": "Tópico MQTT (do Sleep As Android)",
+            "qos": "Qualidade de Serviço (QoS) MQTT",
+            "awake_duration": "Duração Acordado",
+            "sleep_duration": "Duração Adormecido",
+            "awake_states": "Estados Acordado*",
+            "sleep_states": "Estados Adormecido*"
+          }
+        }
+      }
+    },
+    "entity": {
+      "sensor": {
+        "state": {
+          "Unknown": "Desconhecido",
+          "Sleep Tracking Started": "Monitoramento do Sono Iniciado",
+          "Sleep Tracking Stopped": "Monitoramento do Sono Parado",
+          "Sleep Tracking Paused": "Monitoramento do Sono Pausado",
+          "Sleep Tracking Resumed": "Monitoramento do Sono Retomado",
+          "Alarm Snoozed": "Alarme Adiado",
+          "Snooze Canceled": "Adiamento Cancelado",
+          "Time for Bed": "Hora de Dormir",
+          "Alarm Alert Started": "Alerta de Alarme Iniciado",
+          "Alarm Dismissed": "Alarme Desligado",
+          "Skip Next Alarm": "Pular Próximo Alarme",
+          "Show Skip Next Alarm": "Mostrar 'Pular Próximo Alarme'",
+          "REM": "REM",
+          "Smart Period": "Período Inteligente",
+          "Before Smart Period": "Antes do Período Inteligente",
+          "Lullaby Start": "Início de Canção de Ninar",
+          "Lullaby Stop": "Fim de Canção de Ninar",
+          "Lullaby Volume Down": "Diminuir Volume da Canção de Ninar",
+          "Deep Sleep": "Sono Profundo",
+          "Light Sleep": "Sono Leve",
+          "Awake": "Acordado",
+          "Not Awake": "Não Acordado",
+          "Apnea Alarm": "Alarme de Apneia",
+          "Antisnoring": "Antirronco",
+          "Before Alarm": "Antes do Alarme",
+          "Snore Detected": "Ronco Detectado",
+          "Talk Detected": "Conversa Detectada",
+          "Cough Detected": "Tosse Detectada",
+          "Baby Cry Detected": "Choro de Bebê Detectado",
+          "Laugh Detected": "Risada Detectada",
+          "Alarm Rescheduled": "Alarme Remarcado",
+          "None": "Nenhum"
+        }
+      }
+    }
+  }

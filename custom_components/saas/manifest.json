@@ -9,5 +9,5 @@
   "issue_tracker": "https://www.github.com/sudoxnym/saas/issues",
   "quality_scale": "silver",
   "requirements": ["pyhaversion", "paho-mqtt"],
-  "version": "0.0.1"
+  "version": "0.0.1a"
 }

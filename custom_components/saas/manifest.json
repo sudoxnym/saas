@@ -1,0 +1,13 @@
+{
+  "domain": "saas",
+  "name": "SAAS - Sleep As Android Status",
+  "codeowners": ["@sudoxnym"],
+  "config_flow": true,
+  "dependencies": ["mqtt"],
+  "documentation": "https://www.github.com/sudoxnym/saas",
+  "iot_class": "local_push",
+  "issue_tracker": "https://www.github.com/sudoxnym/saas/issues",
+  "quality_scale": "silver",
+  "requirements": ["pyhaversion", "paho-mqtt"],
+  "version": "0.0.1"
+}

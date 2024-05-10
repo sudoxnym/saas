@@ -1,0 +1,75 @@
+{
+  "title": "SAAS - حالة Sleep As Android",
+  "config": {
+    "step": {
+      "user": {
+        "title": "التكوين لـ SAAS - حالة Sleep As Android",
+        "description": "تكوين الإعدادات الأساسية لتكامل SAAS.",
+        "data": {
+          "name": "الاسم للمستشعر",
+          "topic_template": "موضوع MQTT لأحداث Sleep As Android",
+          "qos": "جودة الخدمة (QoS) لـ MQTT",
+          "awake_duration": "مدة اليقظة",
+          "sleep_duration": "مدة النوم",
+          "awake_states": "حالات اليقظة*",
+          "sleep_states": "حالات النوم*"
+        }
+      }
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "إعدادات تكامل SAAS",
+        "description": "تكوين الإعدادات الأساسية لتكامل SAAS.",
+        "data": {
+          "name": "الاسم للمستشعر",
+          "topic_template": "موضوع MQTT (من Sleep As Android)",
+          "qos": "جودة الخدمة (QoS) لـ MQTT",
+          "awake_duration": "مدة اليقظة",
+          "sleep_duration": "مدة النوم",
+          "awake_states": "حالات اليقظة*",
+          "sleep_states": "حالات النوم*"
+        }
+      }
+    }
+  },
+  "entity": {
+    "sensor": {
+      "state": {
+        "Unknown": "غير معروف",
+        "Sleep Tracking Started": "بدأ تتبع النوم",
+        "Sleep Tracking Stopped": "توقف تتبع النوم",
+        "Sleep Tracking Paused": "تم إيقاف تتبع النوم مؤقتًا",
+        "Sleep Tracking Resumed": "استأنف تتبع النوم",
+        "Alarm Snoozed": "تأجيل الإنذار",
+        "Snooze Canceled": "تم إلغاء التأجيل",
+        "Time for Bed": "وقت النوم",
+        "Alarm Alert Started": "بدأ تنبيه الإنذار",
+        "Alarm Dismissed": "تم تجاهل الإنذار",
+        "Skip Next Alarm": "تخطي الإنذار التالي",
+        "Show Skip Next Alarm": "إظهار تخطي الإنذار التالي",
+        "REM": "REM",
+        "Smart Period": "الفترة الذكية",
+        "Before Smart Period": "قبل الفترة الذكية",
+        "Lullaby Start": "بداية التهليل",
+        "Lullaby Stop": "توقف التهليل",
+        "Lullaby Volume Down": "خفض صوت التهليل",
+        "Deep Sleep": "نوم عميق",
+        "Light Sleep": "نوم خفيف",
+        "Awake": "مستيقظ",
+        "Not Awake": "غير مستيقظ",
+        "Apnea Alarm": "إنذار الأنابيب",
+        "Antisnoring": "مضاد للشخير",
+        "Before Alarm": "قبل الإنذار",
+        "Snore Detected": "تم اكتشاف الشخير",
+        "Talk Detected": "تم اكتشاف الكلام",
+        "Cough Detected": "تم اكتشاف السعال",
+        "Baby Cry Detected": "تم اكتشاف بكاء الطفل",
+        "Laugh Detected": "تم اكتشاف الضحك",
+        "Alarm Rescheduled": "تم إعادة جدولة الإنذار",
+        "None": "لا شيء"
+      }
+    }
+  }
+}

@@ -1,8 +1,0 @@
-{
-  "domain": "saas",
-  "name": "SAAS - Sleep As Android Status",
-  "codeowners": ["@sudoxnym"],
-  "config_flow": true,
-  "dependencies": ["mqtt"],
-  "documentation": "https://www.github.com/sudoxnym/saas"
-}

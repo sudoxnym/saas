@@ -1,3 +1,4 @@
+[![Add to HACS](https://img.shields.io/badge/HACS-Custom-orange.svg?style=for-the-badge&logo=home%20assistant&labelColor=202020&color=41BDF5)](https://hacs.xyz/docs/faq/custom_repositories)<br>
 <h1>SAAS - Sleep As Android Status</h1>
 <h4>Description:</h4></br>
 Sleep As Android Status is my solution for wake/sleep state within HA. It listens for the Sleep As Android MQTT Messages, so it does require being on the same network.</br></br>
@@ -17,7 +18,7 @@ This should intelligently and dynamically allow for state changes in the Wake St
 
 <h2>Installation:</h2>
 
-  &nbsp;&nbsp;[![Add to HACS](https://img.shields.io/badge/HACS-Custom-orange.svg?style=for-the-badge&logo=home%20assistant&labelColor=202020&color=41BDF5)](https://hacs.xyz/docs/faq/custom_repositories)<br>
+
   &nbsp;&nbsp;Add https://www.github.com/sudoxnym/saas to your Custom Repositories in HACS</br>
   
   &nbsp;&nbsp;Search and Download SAAS - Sleep As Android Status</br>

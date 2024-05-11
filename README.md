@@ -33,8 +33,8 @@ This should intelligently and dynamically allow for state changes in the Wake St
   &nbsp;&nbsp;Topic: MQTT Topic from Sleep As Android</br>
   &nbsp;&nbsp;QoS: Quality of Service</br></br>
 
-  &nbsp;&nbsp;Awake Duration: Time in seconds in which awake states = true to indicate awake</br>
-  &nbsp;&nbsp;Asleep Duration: Time in seconds in which sleep states = true to indicate asleep</br>
+  &nbsp;&nbsp;Awake Duration: This is for tuning. Time in seconds in which awake states = true to indicate awake. Sensor usually updates within 30 seconds or so after the duration, not entirely sure why the delay.</br>
+  &nbsp;&nbsp;Asleep Duration: This is for tuning. Time in seconds in which sleep states = true to indicate asleep Sensor usually updates within 30 seconds or so after the duration, not entirely sure why the delay.</br>
   &nbsp;&nbsp;Awake States: States to indicate being awake</br>
   &nbsp;&nbsp;Asleep States: States to indicate being asleep</br></br>
 

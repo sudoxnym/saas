@@ -2,6 +2,7 @@
 <h1>SAAS - Sleep As Android Status</h1>
 <h2>Description:</h2></br>
 Sleep As Android Status is my solution for wake/sleep state within HA. It listens for the Sleep As Android MQTT Messages, so it does require being on the same network. As of 0.0.4 Buttons that link with the Companion app have been added.</br></br>
+<h3>This integration works best with a Xioami MiBand (7 or older) mixed with the Notify app and Sleep As Android configured.</h3>
 
 <h3>This integration will create 8 Sensors, 8 Buttons and 1 device per user:</h3></br>
 

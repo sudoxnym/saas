@@ -16,6 +16,8 @@ Lullaby</br>
 Sleep Tracking</br>
 Sleep Statge</br>
 
+This should intelligently and dynamically allow for state changes in the Wake Status Sensor.</br></br>
+
 <h3>Buttons</h3>
 Alarm Dismiss</br>
 Alarm Snooze</br>
@@ -40,8 +42,6 @@ data:
 
 
 
-
-This should intelligently and dynamically allow for state changes in the Wake Status Sensor.</br></br>
 
 
 <h2>Installation:</h2>

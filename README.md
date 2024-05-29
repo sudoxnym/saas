@@ -70,3 +70,22 @@ data:
 Please report any issues.</br>
 This is my first integration.
 Built this in less than a week, with no prior knowledge of Python.
+
+
+<h3>Changes:</h3>
+0.0.6a</br>
+Initial Beta Release
+Added persistant states through HA restart
+Added attributes for the Alarm Event sensor
+
+<h3>Known issues:</h3>
+Error in logs: 
+<pre>
+Logger: homeassistant.helpers.service
+Source: /usr/src/homeassistant/homeassistant/helpers/service.py:708
+First occurred: 3:55:19 PM (1 occurrences)
+Last logged: 3:55:19 PM
+
+Failed to load integration: saas
+NoneType: None</pre>
+No known effects. Just an error message, everything works as expected.

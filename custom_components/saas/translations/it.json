@@ -1,0 +1,75 @@
+{
+  "title": "SAAS - Stato di Sleep As Android",
+  "config": {
+    "step": {
+      "user": {
+        "title": "Configurazione per SAAS - Stato di Sleep As Android",
+        "description": "Configura le impostazioni di base per l'integrazione SAAS.",
+        "data": {
+          "name": "Nome per Sensore",
+          "topic_template": "Topic MQTT per Eventi Sleep As Android",
+          "qos": "Quality of Service (QoS) per MQTT",
+          "awake_duration": "Durata Sveglio",
+          "sleep_duration": "Durata Addormentato",
+          "awake_states": "Stati di Veglia*",
+          "sleep_states": "Stati di Sonno*"
+        }
+      }
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Impostazioni di Integrazione SAAS",
+        "description": "Configura le impostazioni di base per l'integrazione SAAS.",
+        "data": {
+          "name": "Nome per Sensore",
+          "topic_template": "Topic MQTT (da Sleep As Android)",
+          "qos": "Quality of Service (QoS) MQTT",
+          "awake_duration": "Durata Sveglio",
+          "sleep_duration": "Durata Addormentato",
+          "awake_states": "Stati di Veglia*",
+          "sleep_states": "Stati di Sonno*"
+        }
+      }
+    }
+  },
+  "entity": {
+    "sensor": {
+      "state": {
+        "Unknown": "Sconosciuto",
+        "Sleep Tracking Started": "Inizio Monitoraggio del Sonno",
+        "Sleep Tracking Stopped": "Fine Monitoraggio del Sonno",
+        "Sleep Tracking Paused": "Monitoraggio del Sonno in Pausa",
+        "Sleep Tracking Resumed": "Ripresa Monitoraggio del Sonno",
+        "Alarm Snoozed": "Allarme Posticipato",
+        "Snooze Canceled": "Posticipo Annullato",
+        "Time for Bed": "Ora di Andare a Letto",
+        "Alarm Alert Started": "Inizio Allarme",
+        "Alarm Dismissed": "Allarme Disattivato",
+        "Skip Next Alarm": "Salta il Prossimo Allarme",
+        "Show Skip Next Alarm": "Mostra 'Salta il Prossimo Allarme'",
+        "REM": "REM",
+        "Smart Period": "Periodo Smart",
+        "Before Smart Period": "Prima del Periodo Smart",
+        "Lullaby Start": "Inizio Ninna Nanna",
+        "Lullaby Stop": "Fine Ninna Nanna",
+        "Lullaby Volume Down": "Diminuzione Volume Ninna Nanna",
+        "Deep Sleep": "Sonno Profondo",
+        "Light Sleep": "Sonno Leggero",
+        "Awake": "Sveglio",
+        "Not Awake": "Non Sveglio",
+        "Apnea Alarm": "Allarme Apnea",
+        "Antisnoring": "Antirussamento",
+        "Before Alarm": "Prima dell'Allarme",
+        "Snore Detected": "Russamento Rilevato",
+        "Talk Detected": "Conversazione Rilevata",
+        "Cough Detected": "Tosse Rilevata",
+        "Baby Cry Detected": "Pianto del Bambino Rilevato",
+        "Laugh Detected": "Risata Rilevata",
+        "Alarm Rescheduled": "Allarme Riprogrammato",
+        "None": "Nessuno"
+      }
+    }
+  }
+}

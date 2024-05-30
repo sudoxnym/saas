@@ -105,8 +105,8 @@ class SAASAlarmEventSensor(RestoreEntity):
         self._value2 = None
         self._time = None
         self.entry_id = entry_id 
-        self._reset_timer = None
         self._last_event = None
+        self._timeout_task = None
 
     @property
     def unique_id(self):
@@ -154,120 +154,36 @@ class SAASAlarmEventSensor(RestoreEntity):
             self._state = state.state
             _LOGGER.info(f"{datetime.now().strftime('%H:%M:%S:%f')} (Line {inspect.currentframe().f_lineno}): Loaded state: {self._state} for sensor {self.name}")
 
-        async def reset_state(_):
-            """Reset the state to None after a delay."""
-            self._state = 'None'
-            self.async_write_ha_state()
+        # Start the timeout task as soon as the sensor is loaded
+        self._timeout_task = asyncio.create_task(self.timeout())
 
         async def message_received(msg):
             """Handle new MQTT messages."""
-            # Cancel the previous state reset timer
-            if self._reset_timer:
-                self._reset_timer.cancel()
-            
-            # Schedule a state reset after 15 seconds
-            self._reset_timer = async_call_later(self._hass, 15, reset_state)
+            # Cancel the previous timeout task if it exists
+            if self._timeout_task:
+                self._timeout_task.cancel()
 
             # Parse the incoming message
             msg_json = json.loads(msg.payload)
-        
+
             _LOGGER.info(f"{datetime.now().strftime('%H:%M:%S:%f')} (Line {inspect.currentframe().f_lineno}): Received MQTT message: {msg_json} for sensor {self.name}")
-        
+
             # Extract the 'value1' and 'value2' fields
             value1 = msg_json.get('value1')
-        
+
             # Parse 'value1' as a datetime
             if value1:
                 timestamp = int(value1) / 1000.0
                 self._time = datetime.fromtimestamp(timestamp)
                 self._value1 = value1
                 _LOGGER.info(f"{datetime.now().strftime('%H:%M:%S:%f')} (Line {inspect.currentframe().f_lineno}): Parsed 'value1' as datetime: {self._time} for sensor {self.name}")
-        
+
             # Extract the 'value2' field
             value2 = msg_json.get('value2')
-        
+
             # Store 'value2' as the message if it exists
             self._value2 = value2 if value2 else "None"
             _LOGGER.info(f"{datetime.now().strftime('%H:%M:%S:%f')} (Line {inspect.currentframe().f_lineno}): Stored 'value2' as message: {self._value2} for sensor {self.name}")
-        
-            # Extract the EVENT field
-            event = msg_json.get('event')
-        
-            if event is None:
-                _LOGGER.warning(f"{datetime.now().strftime('%H:%M:%S:%f')} (Line {inspect.currentframe().f_lineno}): No 'event' key in the MQTT message: {msg_json} for sensor {self.name}")
-                return
-        
-            _LOGGER.debug(f"{datetime.now().strftime('%H:%M:%S:%f')} (Line {inspect.currentframe().f_lineno}): Extracted Event {event} from message for sensor {self.name}")
-        
-            # Use the mapping to convert the event to the corresponding state
-            new_state = self._mapping.get(event)
-            if new_state is not None:
-                _LOGGER.debug(f"{datetime.now().strftime('%H:%M:%S:%f')} (Line {inspect.currentframe().f_lineno}): Mapped {event} to {new_state} for sensor {self.name}")
-                self._state = new_state
-                self._last_event = new_state  # Update the last event
-                _LOGGER.debug(f"{datetime.now().strftime('%H:%M:%S:%f')} (Line {inspect.currentframe().f_lineno}): Set state to {new_state} for sensor {self.name}")
-                self.async_write_ha_state()
-    
-        # Subscribe to the topic from the user input
-        await async_subscribe(self._hass, self._hass.data[DOMAIN][self.entry_id][CONF_TOPIC], message_received)
-
-    async def async_will_remove_from_hass(self):
-        """Run when entity will be removed from hass."""
-        # Save the current state to the state machine
-        self._hass.states.async_set(self.entity_id, self._state)
-        _LOGGER.info(f"{datetime.now().strftime('%H:%M:%S:%f')} (Line {inspect.currentframe().f_lineno}): Saved state: {self._state} for sensor {self.name}")
-
-class SAASSoundSensor(RestoreEntity):
-    """Representation of a SAAS - Sleep As Android Stats sensor for Sound Events."""
-    def __init__(self, hass, name, mapping, entry_id):
-        """Initialize the sensor."""
-        self._state = None
-        self._name = name
-        self._hass = hass
-        self._mapping = mapping
-        self.entry_id = entry_id 
-
-    @property
-    def unique_id(self):
-        """Return a unique ID."""
-        return f"saas_sound_sensor_{self._name}"
-
-    @property
-    def name(self):
-        """Return the name of the sensor."""
-        return f"SAAS {self._name} Sound"
-
-    @property
-    def state(self):
-        """Return the state of the sensor."""
-        return self._state
-
-    @property
-    def device_info(self):
-        """Return information about the device."""
-        return {
-            "identifiers": {(DOMAIN, self._name)},
-            "name": self._name,
-            "manufacturer": INTEGRATION_NAME,
-            "model": MODEL,
-        }
-
-    async def async_added_to_hass(self):
-        """Run when entity about to be added."""
-        await super().async_added_to_hass()
-
-        # Load the previous state from the state machine
-        state = await self.async_get_last_state()
-        if state:
-            self._state = state.state
-            _LOGGER.info(f"{datetime.now().strftime('%H:%M:%S:%f')} (Line {inspect.currentframe().f_lineno}): Loaded state: {self._state} for sensor {self.name}")
-
-        async def message_received(msg):
-            """Handle new MQTT messages."""
-            # Parse the incoming message
-            msg_json = json.loads(msg.payload)
-
-            _LOGGER.info(f"{datetime.now().strftime('%H:%M:%S:%f')} (Line {inspect.currentframe().f_lineno}): Received MQTT message: {msg_json} for sensor {self.name}")
 
             # Extract the EVENT field
             event = msg_json.get('event')
@@ -281,8 +197,12 @@ class SAASSoundSensor(RestoreEntity):
             if new_state is not None:
                 _LOGGER.debug(f"{datetime.now().strftime('%H:%M:%S:%f')} (Line {inspect.currentframe().f_lineno}): Mapped {event} to {new_state} for sensor {self.name}")
                 self._state = new_state
+                self._last_event = new_state  # Update the last event
                 _LOGGER.debug(f"{datetime.now().strftime('%H:%M:%S:%f')} (Line {inspect.currentframe().f_lineno}): Set state to {new_state} for sensor {self.name}")
                 self.async_schedule_update_ha_state()
+
+            # Create a new timeout task
+            self._timeout_task = asyncio.create_task(self.timeout())
 
         # Subscribe to the topic from the user input
         await async_subscribe(self._hass, self._hass.data[DOMAIN][self.entry_id][CONF_TOPIC], message_received)
@@ -292,6 +212,14 @@ class SAASSoundSensor(RestoreEntity):
         # Save the current state to the state machine
         self._hass.states.async_set(self.entity_id, self._state)
         _LOGGER.info(f"{datetime.now().strftime('%H:%M:%S:%f')} (Line {inspect.currentframe().f_lineno}): Saved state: {self._state} for sensor {self.name}")
+
+    async def timeout(self):
+        """Set the state to 'None' after a timeout."""
+        await asyncio.sleep(15)
+        self._state = "None"
+        self._last_event = "None"
+        _LOGGER.debug(f"{datetime.now().strftime('%H:%M:%S:%f')} (Line {inspect.currentframe().f_lineno}): Set state to 'None' due to timeout for sensor {self.name}")
+        self.async_schedule_update_ha_state()     
 
 class SAASSoundSensor(RestoreEntity):
     """Representation of a SAAS - Sleep As Android Stats sensor for Sound Events."""

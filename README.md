@@ -102,7 +102,7 @@ awk -F ", " '{print $17}' | grep authKey | tail -1 | awk -F "=" '{print $2}'</pr
 <b>0.0.6a</b></br>
 Initial Beta Release</br>
 Added persistant states through HA restart</br>
-Added attributes for the Alarm Event sensor</br>
+Added attributes for the Alarm Event sensor</br></br>
 <b>0.1.0</b></br>
 Fixed Wake Status Timing <b>(HUGE)</b></br>
 Fixed bug with Sound sensor</br>

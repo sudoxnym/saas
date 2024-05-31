@@ -73,7 +73,7 @@ awk -F ", " '{print $17}' | grep authKey | tail -1 | awk -F "=" '{print $2}'</pr
 5. Follow the prompts, enable any permission it asks for, create the profile, input Auth Key, and select Mi Fitness is not installed</br>
 6. Open the hamburger menu on the top left</br>
 7. Search > Search for "Sleep"</br>
-8. Turn on Sleep as Android
+8. Turn on Sleep as Android</br>
 9. Choose the four squares in the upper right</br>
 10. Scroll to and choose "Custom triggers"</br>
 11. Turn on Fell Asleep and set to Sleep as Android - Start sleep tracking</br>

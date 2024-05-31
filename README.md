@@ -68,7 +68,7 @@ Windows:</br>
 awk -F ", " '{print $17}' | grep authKey | tail -1 | awk -F "=" '{print $2}'</pre>
 &nbsp;&nbsp;2f. Copy/clipboard the output. Disconnect phone, close ADB.</br>
 &nbsp;&nbsp;&nbsp;&nbsp; Credit: <a href="https://www.reddit.com/r/miband/comments/15j0rfq/comment/kxlyzc6/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button">iamfosscad</a></br>
-3. Uninstall Mi Fitness
+3. Uninstall Mi Fitness</br>
 4. Download/Install <a href="https://play.google.com/store/apps/details?id=com.mc.miband1&hl=en_US">Notify for Mi Band (up to 7)</a></br>
 5. Follow the prompts, enable any permission it asks for, create the profile, input Auth Key, and select Mi Fitness is not installed</br>
 6. Open the hamburger menu on the top left</br>

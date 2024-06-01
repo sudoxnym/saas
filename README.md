@@ -12,14 +12,14 @@ Disturbance</br>
 Alarm</br>
 Lullaby</br>
 Sleep Tracking</br>
-Sleep Statge</br></br>
+Sleep Stage</br></br>
 This should intelligently and dynamically allow for state changes in the Wake Status Sensor.</br></br>
 <h3>Buttons</h3>
 Alarm Dismiss</br>
 Alarm Snooze</br>
 Lullaby Stop</br>
 Sleep Tracking Pause</br>
-Sleep Tracking Resum</br>
+Sleep Tracking Resume</br>
 Sleep Tracking Start</br>
 Sleep Tracking Start with Optimal Alarm</br>
 Sleep Tracking Stop</br>

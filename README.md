@@ -63,10 +63,11 @@ Windows:</br>
 &nbsp;&nbsp;2a. Open folder with adb in it</br>
 &nbsp;&nbsp;2b. Right click a blank spot within the folder</br>
 &nbsp;&nbsp;2c. Open in terminal</br>
-&nbsp;&nbsp;2d. <pre>./adb shell</pre>
-&nbsp;&nbsp;2e. <pre>grep -E "authKey=[a-z0-9]*," /sdcard/Android/data/com.xiaomi.wearable/files/log/XiaomiFit.device.log |
+&nbsp;&nbsp;2d. Ensure usb debugging is on on your android and plug it into the pc.</br>
+&nbsp;&nbsp;2e. <pre>./adb shell</pre>
+&nbsp;&nbsp;2f. <pre>grep -E "authKey=[a-z0-9]*," /sdcard/Android/data/com.xiaomi.wearable/files/log/XiaomiFit.device.log |
 awk -F ", " '{print $17}' | grep authKey | tail -1 | awk -F "=" '{print $2}'</pre>
-&nbsp;&nbsp;2f. Copy/clipboard the output. Disconnect phone, close ADB.</br>
+&nbsp;&nbsp;2g. Copy/clipboard the output. Disconnect phone, close ADB.</br>
 &nbsp;&nbsp;&nbsp;&nbsp; Credit: <a href="https://www.reddit.com/r/miband/comments/15j0rfq/comment/kxlyzc6/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button">iamfosscad</a></br>
 3. Uninstall Mi Fitness</br>
 4. Download/Install <a href="https://play.google.com/store/apps/details?id=com.mc.miband1&hl=en_US">Notify for Mi Band (up to 7)</a></br>

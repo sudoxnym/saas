@@ -56,7 +56,7 @@ Awake States: States to indicate being awake</br>
 Asleep States: States to indicate being asleep</br>
 Mobile App: Target for buttons <b>REQUIRES COMPANION APP</b></br></br>
 
-<h3>Set Up Notify for <a href="https://www.amazon.com/Xiaomi-Activity-Tracker-High-Res-Bluetooth/dp/B0B2DK5YCP">MiBand 7</a> (as of May 29, 2024)</h3>
+<h3>Set Up Notify for <a href="https://www.amazon.com/Xiaomi-Activity-Tracker-High-Res-Bluetooth/dp/B0B2DK5YCP">MiBand 7</a> (as of August 10, 2024)</h3>
 1. Pair MiBand 7 as you normally would with <a href="https://play.google.com/store/apps/details?id=com.xiaomi.wearable&hl=en_US">Mi Fitness</a> app </br>
 2. Obtain auth key for Notify app. Connect to pc with usb and open your adb <a href="https://developer.android.com/tools/releases/platform-tools">SDK Platform-Pools</a>, or if you're more advanced, connect wirelessly</br>
 Windows:</br>

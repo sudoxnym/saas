@@ -86,7 +86,7 @@ awk -F ", " '{print $17}' | grep authKey | tail -1 | awk -F "=" '{print $2}'</pr
 2. Settings wheel in top right > Services > Automation</br>
 3. MQTT</br>
 &nbsp;&nbsp;3a. URL
-<pre>(tcp/ssl)://(MQTT User):(MQTT Pass)@(HA URL):(port)</pre>
+<pre>(tcp/ssl)://[username][:password]@host.domain[:port]</pre>
 &nbsp;&nbsp;3b. Topic > something recognizable. You need this exact topic in HA Integration Config.</br>
 &nbsp;&nbsp;3c. Client ID > I set the same, not sure if it should be, but it works.</br>
 &nbsp;&nbsp;3d. Test > Wait for "Success" toast message</br>

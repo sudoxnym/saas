@@ -2,7 +2,10 @@
 <h1>SAAS - Sleep As Android Status</h1>
 <h2>Description:</h2>
 Sleep As Android Status is my solution for wake/sleep state within HA. It listens for the Sleep As Android MQTT Messages, so it does require being on the same network. As of 0.0.4 Buttons that link with the Companion app have been added.</br>
-<h3>This integration works best with a Xioami MiBand (7 or older) mixed with the Notify app and Sleep As Android configured.</h3>
+<h4>This integration works best with a Xioami MiBand (7 or older) mixed with the Notify app and Sleep As Android configured.</h4>
+<h3>Known working:</h3>
+Xioami Mi Band 7, 8 and 9 may work, but they have a different os that jumps through hoops to work.</br>
+Garmin Fenix 7X with Garmin Alternative, <b>NOT</b> the free one.</br>
 <h3>This integration will create 8 Sensors, 8 Buttons, 1 service, and 1 device per user:</h3>
 <h3>Sensors</h3>
 Message Received *State</br>
@@ -86,7 +89,7 @@ awk -F ", " '{print $17}' | grep authKey | tail -1 | awk -F "=" '{print $2}'</pr
 2. Settings wheel in top right > Services > Automation</br>
 3. MQTT</br>
 &nbsp;&nbsp;3a. URL
-<pre>(tcp/ssl)://[username][:password]@host.domain[:port]</pre>
+<pre>(tcp/ssl)://(MQTT User):(MQTT Pass)@(HA URL):(port)</pre>
 &nbsp;&nbsp;3b. Topic > something recognizable. You need this exact topic in HA Integration Config.</br>
 &nbsp;&nbsp;3c. Client ID > I set the same, not sure if it should be, but it works.</br>
 &nbsp;&nbsp;3d. Test > Wait for "Success" toast message</br>

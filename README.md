@@ -78,10 +78,6 @@ awk -F ", " '{print $17}' | grep authKey | tail -1 | awk -F "=" '{print $2}'</pr
 6. Open the hamburger menu on the top left</br>
 7. Search > Search for "Sleep"</br>
 8. Turn on Sleep as Android</br>
-9. Choose the four squares in the upper right</br>
-10. Scroll to and choose "Custom triggers"</br>
-11. Turn on Fell Asleep and set to Sleep as Android - Start sleep tracking</br>
-12. Turn on Awoke and set to Sleep as Android - Stop sleep tracking</br>
 13. Enjoy</br></br>
 
 <h3><a href="https://play.google.com/store/apps/details?id=com.urbandroid.sleep&hl=en_US">Sleep as Android</a></h3>

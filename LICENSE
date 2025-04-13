@@ -1,33 +1,21 @@
-# License for SAAS - Sleep As Android Status Integration
+MIT License
 
-## 1. Terms
+Copyright (c) 2025 Joseph Ayers
 
-The software, "SAAS - Sleep As Android Status" (hereafter referred to as "the software"), is owned and copyrighted by @sudoxnym. The source code is available on GitHub at [SAAS Repository](https://www.github.com/sudoxnym/saas).
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
 
-## 2. Grant of License
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
 
-This License grants you, free of charge, the non-exclusive right to use the software for personal use only. You are not permitted to redistribute, modify, or use the software for commercial purposes without explicit permission from the copyright owner.
-
-## 3. Restrictions
-
-- **No Redistribution**: You may not distribute copies of the software to third parties.
-- **No Modification**: You may not modify, adapt, translate, or create derivative works based on the software without prior written consent from the copyright owner.
-- **No Commercial Use**: You may not use the software for commercial purposes without obtaining a license to do so from the copyright owner.
-
-## 4. Disclaimer of Warranty
-
-The software is provided "AS IS", without warranty of any kind, express or implied, including but not limited to the warranties of merchantability, fitness for a particular purpose, and non-infringement. In no event shall the authors or copyright holders be liable for any claim, damages, or other liability, whether in an action of contract, tort or otherwise, arising from, out of, or in connection with the software or the use or other dealings in the software.
-
-## 5. Limitation of Liability
-
-In no event shall the copyright owner or contributors be liable for any direct, indirect, incidental, special, exemplary, or consequential damages (including, but not limited to, procurement of substitute goods or services; loss of use, data, or profits; or business interruption) however caused and on any theory of liability, whether in contract, strict liability, or tort (including negligence or otherwise) arising in any way out of the use of this software, even if advised of the possibility of such damage.
-
-## 6. Termination
-
-This License is effective until terminated. You can terminate it at any time by destroying all copies of the software in your possession. It will also automatically terminate if you fail to comply with any term or condition of this License. Upon termination, you agree to destroy all copies of the software.
-
-## 7. Miscellaneous
-
-This License constitutes the entire agreement between the parties concerning the subject matter hereof. If any provision of this License is found to be unenforceable, that provision shall be enforced to the maximum extent permissible so as to effect the intent of the parties, and the remainder of this License shall continue in full force and effect.
-
-By downloading, installing, or using the software, you agree to be bound by the terms of this License. If you do not agree to the terms of this License, do not download, install, or use the software.
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.

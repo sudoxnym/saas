@@ -13,57 +13,70 @@ Sleep As Android Status is my solution for wake/sleep state within HA. It listen
 
 <h4>💡 This integration works best with a Xioami MiBand (7 or older) mixed with the Notify app and Sleep As Android configured.</h4>
 
-<h3>✅ Known working:</h3>
-<ul>
-  <li>📟 Xioami Mi Band 7</li>
-  <li>📟 Xioami Mi Band 8 and 9 may work, but they have a different os that jumps through hoops to work.</li>
-  <li>⌚ Garmin Fenix 7X with Garmin Alternative, <b>NOT</b> the free one.</li>
-  <li>⌚ Xioami Amazfit GTR Mini, may require root, I am rooted so I just did what's in this guide but there may be alternative ways to get the key</li>
-</ul>
-
 <h3>🧱 This integration will create:</h3>
+
 <ul>
-  <li>8 Sensors</li>
-  <li>8 Buttons</li>
-  <li>1 Service</li>
-  <li>1 Device per user</li>
-</ul>
-
-<h3>📡 Sensors</h3>
-<ul>
-  <li>Message Received *State</li>
-  <li>Wake Status</li>
-  <li>Sound</li>
-  <li>Disturbance</li>
-  <li>Alarm</li>
-  <li>Lullaby</li>
-  <li>Sleep Tracking</li>
-  <li>Sleep Stage</li>
-</ul>
-
-<p>This should intelligently and dynamically allow for state changes in the Wake Status Sensor.</p>
-
-<h3>🎛️ Buttons</h3>
-<ul>
-  <li>Alarm Dismiss</li>
-  <li>Alarm Snooze</li>
-  <li>Lullaby Stop</li>
-  <li>Sleep Tracking Pause</li>
-  <li>Sleep Tracking Resume</li>
-  <li>Sleep Tracking Start</li>
-  <li>Sleep Tracking Start with Optimal Alarm</li>
-  <li>Sleep Tracking Stop</li>
-</ul>
-
-<h3>🛠️ Service</h3>
-<pre>
+  <li>
+    <details>
+      <summary><strong>📡 8 Sensors</strong></summary>
+      <ul>
+        <li>Message Received *State</li>
+        <li>Wake Status</li>
+        <li>Sound</li>
+        <li>Disturbance</li>
+        <li>Alarm</li>
+        <li>Lullaby</li>
+        <li>Sleep Tracking</li>
+        <li>Sleep Stage</li>
+      </ul>
+      <p>This should intelligently and dynamically allow for state changes in the Wake Status Sensor.</p>
+    </details>
+  </li>
+  <li>
+    <details>
+      <summary><strong>🎛️ 8 Buttons</strong></summary>
+      <ul>
+        <li>Alarm Dismiss</li>
+        <li>Alarm Snooze</li>
+        <li>Lullaby Stop</li>
+        <li>Sleep Tracking Pause</li>
+        <li>Sleep Tracking Resume</li>
+        <li>Sleep Tracking Start</li>
+        <li>Sleep Tracking Start with Optimal Alarm</li>
+        <li>Sleep Tracking Stop</li>
+      </ul>
+    </details>
+  </li>
+  <li>
+    <details>
+      <summary><strong>🛠️ 1 Service</strong></summary>
+      <pre>
 service: saas.saas_example_alarm_set
 data:
   message: Example Message!
   day: monday
   hour: 7
   minute: 30
-</pre>
+      </pre>
+    </details>
+  </li>
+  <li>
+    <details>
+      <summary><strong>🔗 1 Device per user</strong></summary>
+      <p>One HA device is created per configured user instance to link sensors, services, and buttons.</p>
+    </details>
+  </li>
+</ul>
+
+<details>
+  <summary><strong>✅ Known working</strong></summary>
+  <ul>
+    <li>📟 Xioami Mi Band 7</li>
+    <li>📟 Xioami Mi Band 8 and 9 may work, but they have a different OS that jumps through hoops to work.</li>
+    <li>⌚ Garmin Fenix 7X with Garmin Alternative, <b>NOT</b> the free one.</li>
+    <li>⌚ Xioami Amazfit GTR Mini — may require root. I am rooted so I just did what's in this guide, but there may be alternative ways to get the key.</li>
+  </ul>
+</details>
 
 <h2>🧪 Installation:</h2>
 <ul>
@@ -150,29 +163,32 @@ sqlite3 origin_db_1234567890 "SELECT AUTHKEY FROM DEVICE;"
   <li>Wearables > Xiaomi Mi Band > Test sensor</li>
 </ol>
 
-<h2>📦 Changes:</h2>
-<b>0.0.6a</b>
-<ul>
-  <li>Initial Beta Release</li>
-  <li>Added persistent states</li>
-  <li>Alarm Event sensor attributes</li>
-</ul>
+<details>
+  <summary><strong>📦 Changes</strong></summary>
+  <b>0.0.6a</b>
+  <ul>
+    <li>Initial Beta Release</li>
+    <li>Added persistent states</li>
+    <li>Alarm Event sensor attributes</li>
+  </ul>
 
-<b>0.1.0</b>
-<ul>
-  <li>Fixed Wake Status Timing</li>
-  <li>Bug fixes on Sound sensor</li>
-  <li>Accurate updates to AlarmEvent, Disturbance, Sound</li>
-  <li>Organized README</li>
-</ul>
+  <b>0.1.0</b>
+  <ul>
+    <li>Fixed Wake Status Timing</li>
+    <li>Bug fixes on Sound sensor</li>
+    <li>Accurate updates to AlarmEvent, Disturbance, Sound</li>
+    <li>Organized README</li>
+  </ul>
+</details>
 
-<h2>🚨 Known issues:</h2>
-<pre>
+<details>
+  <summary><strong>🚨 Known Issues</strong></summary>
+  <pre>
 Logger: homeassistant.helpers.service
 Source: /usr/src/homeassistant/homeassistant/helpers/service.py:708
 Failed to load integration: saas
 NoneType: None
-</pre>
-
-<p>💬 No known effects. Just an error message, everything works as expected.</p>
-<p>This is my first integration.</p>
+  </pre>
+  <p>💬 No known effects. Just an error message, everything works as expected.</p>
+  <p>This is my first integration.</p>
+</details>

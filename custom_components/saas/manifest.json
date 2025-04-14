@@ -1,11 +1,10 @@
 {
-  "domain": "saas",
+  "domain": "sleep_as_android",
   "name": "SAAS - Sleep As Android Status",
   "codeowners": ["@sudoxnym"],
   "config_flow": true,
   "dependencies": ["mqtt", "mobile_app"],
   "documentation": "https://www.github.com/sudoxnym/saas",
   "issue_tracker": "https://www.github.com/sudoxnym/saas/issues",
-  "version": "0.1.0",
-  "brand": "sleep_as_android"
+  "version": "0.1.0"
 }

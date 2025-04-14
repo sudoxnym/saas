@@ -1,3 +1,4 @@
+import asyncio
 import logging
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant
@@ -22,12 +23,9 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry):
 
     _logger.info(f"hass.data[DOMAIN] after adding entry data: {hass.data[DOMAIN]}")
 
-    # Forward the setup to the sensor and button platforms
-    for platform in ["sensor", "button"]:
-        _logger.info(f"Forwarding setup to {platform} platform")
-        hass.async_create_task(
-            await hass.config_entries.async_forward_entry_setup(entry, platform)
-        )
+    # Forward the setup to the sensor and button platforms using the new method.
+    # Note: async_forward_entry_setups must always be awaited.
+    await hass.config_entries.async_forward_entry_setups(entry, ["sensor", "button"])
 
     _logger.info(f"hass.data[DOMAIN] before async_setup_services: {hass.data[DOMAIN]}")
 
@@ -36,7 +34,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry):
     await async_setup_services(hass)
     _logger.info("Finished setup of services")
 
-    _logger.info(f"hass.data[DOMAIN] after setup of services: {hass.data[DOMAIN]}")  # New log
+    _logger.info(f"hass.data[DOMAIN] after setup of services: {hass.data[DOMAIN]}")
 
     async def reload_entry():
         _logger.info("Reloading entry")

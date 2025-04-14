@@ -6,5 +6,5 @@
   "dependencies": ["mqtt", "mobile_app"],
   "documentation": "https://www.github.com/sudoxnym/saas",
   "issue_tracker": "https://www.github.com/sudoxnym/saas/issues",
-  "version": "0.1.0d"
+  "version": "0.1.0e"
 }

@@ -26,7 +26,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry):
     for platform in ["sensor", "button"]:
         _logger.info(f"Forwarding setup to {platform} platform")
         hass.async_create_task(
-            hass.config_entries.async_forward_entry_setup(entry, platform)
+            await hass.config_entries.async_forward_entry_setup(entry, platform)
         )
 
     _logger.info(f"hass.data[DOMAIN] before async_setup_services: {hass.data[DOMAIN]}")

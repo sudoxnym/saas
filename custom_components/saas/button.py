@@ -572,4 +572,4 @@ async def async_setup_entry(hass, config_entry, async_add_entities):
 
     # Add the entities
     async_add_entities(entities)
-    # _LOGGER.debug("SAAS Sleep Tracking buttons set up successfully")
+    return True

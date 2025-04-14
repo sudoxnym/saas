@@ -3,6 +3,7 @@
   "name": "SAAS - Sleep As Android Status",
   "codeowners": ["@sudoxnym"],
   "config_flow": true,
+  "platforms": ["sensor", "button"],
   "dependencies": ["mqtt", "mobile_app"],
   "documentation": "https://www.github.com/sudoxnym/saas",
   "issue_tracker": "https://www.github.com/sudoxnym/saas/issues",

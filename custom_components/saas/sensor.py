@@ -833,4 +833,3 @@ async def async_setup_entry(hass, entry, async_add_entities):
             await entity.async_setup()
 
     async_add_entities(entities)
-    return True

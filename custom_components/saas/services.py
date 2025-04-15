@@ -50,7 +50,7 @@ class SAASService:
         except Exception as e:
             _LOGGER.error(f"Error occurred while calling service: {e}")
 
-async def async_setup_services(hass: HomeAssistant) -> bool:
+async def async_setup_services(hass: HomeAssistant) -> None:
     """Set up services for the SAAS component."""
     _LOGGER.info(f"Setting up services for {DOMAIN}")
     # Register the service for each entry
@@ -71,5 +71,3 @@ async def async_setup_services(hass: HomeAssistant) -> bool:
         else:
             _LOGGER.warning(f"No entry data found for entry_id: {entry_id}")
     _LOGGER.info(f"Finished setting up services for {DOMAIN}")
-
-    return True

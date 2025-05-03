@@ -1,7 +1,7 @@
 import logging
 from homeassistant.components.button import ButtonEntity
 from homeassistant.helpers import device_registry as dr
-from .const import DOMAIN, INTEGRATION_NAME, MODEL, CONF_NAME
+from .const import DOMAIN, INTEGRATION_NAME, MODEL, CONF_NAME, CONF_NOTIFY_TARGET
 import asyncio
 
 # Set up logging
@@ -50,6 +50,12 @@ class SAASSleepTrackingStart(ButtonEntity):
         return device_info
 
     def press(self):
+        if not self._notify_target:
+            self._hass.components.persistent_notification.async_create(
+                "add a mobile device to use this function",
+                title=self.name,
+            )
+            return
         """Press the button."""
         service_name = self._notify_target  # Remove the "notify." prefix
     
@@ -117,6 +123,12 @@ class SAASSleepTrackingStop(ButtonEntity):
         return device_info
 
     def press(self):
+        if not self._notify_target:
+            self._hass.components.persistent_notification.async_create(
+                "add a mobile device to use this function",
+                title=self.name,
+            )
+            return
         """Press the button."""
         service_name = self._notify_target  # Remove the "notify." prefix
     
@@ -184,6 +196,12 @@ class SAASSleepTrackingPause(ButtonEntity):
         return device_info
 
     def press(self):
+        if not self._notify_target:
+            self._hass.components.persistent_notification.async_create(
+                "add a mobile device to use this function",
+                title=self.name,
+            )
+            return
         """Press the button."""
         service_name = self._notify_target  # Remove the "notify." prefix
     
@@ -251,6 +269,12 @@ class SAASSleepTrackingResume(ButtonEntity):
         return device_info
 
     def press(self):
+        if not self._notify_target:
+            self._hass.components.persistent_notification.async_create(
+                "add a mobile device to use this function",
+                title=self.name,
+            )
+            return
         """Press the button."""
         service_name = self._notify_target  # Remove the "notify." prefix
     
@@ -318,6 +342,12 @@ class SAASAlarmClockSnooze(ButtonEntity):
         return device_info
 
     def press(self):
+        if not self._notify_target:
+            self._hass.components.persistent_notification.async_create(
+                "add a mobile device to use this function",
+                title=self.name,
+            )
+            return
         """Press the button."""
         service_name = self._notify_target  # Remove the "notify." prefix
     
@@ -385,6 +415,12 @@ class SAASAlarmClockDisable(ButtonEntity):
         return device_info
 
     def press(self):
+        if not self._notify_target:
+            self._hass.components.persistent_notification.async_create(
+                "add a mobile device to use this function",
+                title=self.name,
+            )
+            return
         """Press the button."""
         service_name = self._notify_target  # Remove the "notify." prefix
     
@@ -452,6 +488,12 @@ class SAASSleepTrackingStartWithAlarm(ButtonEntity):
         return device_info
 
     def press(self):
+        if not self._notify_target:
+            self._hass.components.persistent_notification.async_create(
+                "add a mobile device to use this function",
+                title=self.name,
+            )
+            return
         """Press the button."""
         service_name = self._notify_target  # Remove the "notify." prefix
     
@@ -519,6 +561,12 @@ class SAASLullabyStop(ButtonEntity):
         return device_info
 
     def press(self):
+        if not self._notify_target:
+            self._hass.components.persistent_notification.async_create(
+                "add a mobile device to use this function",
+                title=self.name,
+            )
+            return
         """Press the button."""
         service_name = self._notify_target  # Remove the "notify." prefix
     
@@ -546,12 +594,15 @@ class SAASLullabyStop(ButtonEntity):
 
         
 async def async_setup_entry(hass, config_entry, async_add_entities):
-    """Set up the SAAS Sleep Tracking Start, Stop and Pause buttons from a config entry."""
+    notify_target = config_entry.data.get(CONF_NOTIFY_TARGET)
+    if not notify_target:
+        _LOGGER.warning("no notify_target configured; skipping button setup")
+        return
     # _LOGGER.debug("Setting up SAAS Sleep Tracking buttons from a config entry with data: %s", config_entry.data)
     
     # Extract the necessary data from config_entry.data
     name = config_entry.data[CONF_NAME]
-    notify_target = config_entry.data['notify_target']
+    notify_target = config_entry.data.get(CONF_NOTIFY_TARGET)
     
     # Create instances of SAASSleepTrackingStart, SAASSleepTrackingStop and SAASSleepTrackingPause
     entities = [

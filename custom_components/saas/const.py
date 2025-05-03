@@ -5,21 +5,24 @@ DOMAIN = "saas"
 INTEGRATION_NAME = "SAAS - Sleep As Android Stats"
 MODEL = "SAAS - Version 0.0.1"
 
-CONF_NAME = "name" # Name of the Integration
-CONF_TOPIC = "topic_template"   # MQTT Topic for Sleep As Android Events
-CONF_QOS = "qos"    # Quality of Service
-CONF_AWAKE_DURATION = "awake_duration" # Awake Duration
+CONF_NAME = "name"  # Name of the Integration
+CONF_TOPIC = "topic_template"  # MQTT Topic for Sleep As Android Events
+CONF_AWAKE_DURATION = "awake_duration"  # Awake Duration
 CONF_SLEEP_DURATION = "sleep_duration"  # Sleep Duration
-
 CONF_AWAKE_STATES = "awake_states"  # Awake States
-CONF_SLEEP_STATES = "sleep_states" # Sleep States
+CONF_SLEEP_STATES = "sleep_states"  # Sleep States
+CONF_NOTIFY_TARGET = "notify_target"  # Notify Target
 
-CONF_NOTIFY_TARGET = "notify_target"    # Notify Target
-
-DEFAULT_AWAKE_DURATION = 10 # Default Awake Duration
-DEFAULT_SLEEP_DURATION = 10    # Default Sleep Duration
-DEFAULT_AWAKE_STATES = ["Awake", "Sleep Tracking Stopped"] # Default Awake States
-DEFAULT_SLEEP_STATES = ["Not Awake", "Rem", "Light Sleep", "Deep Sleep", "Sleep Tracking Started"]# Default Sleep States
+DEFAULT_AWAKE_DURATION = 10  # Default Awake Duration
+DEFAULT_SLEEP_DURATION = 10  # Default Sleep Duration
+DEFAULT_AWAKE_STATES = ["Awake", "Sleep Tracking Stopped"]  # Default Awake States
+DEFAULT_SLEEP_STATES = [
+    "Not Awake",
+    "Rem",
+    "Light Sleep",
+    "Deep Sleep",
+    "Sleep Tracking Started",
+]  # Default Sleep States
 
 SENSOR_TYPES = {
     "state": {"name": "State", "device_class": None},
@@ -33,7 +36,7 @@ DAY_MAPPING = {
     "wednesday": 4,
     "thursday": 5,
     "friday": 6,
-    "saturday": 7
+    "saturday": 7,
 }
 
 AVAILABLE_STATES = [
@@ -67,8 +70,9 @@ AVAILABLE_STATES = [
     'Sound Event Laugh',
     'Sound Event Snore',
     'Sound Event Talk',
-    'Time for Bed'
+    'Time for Bed',
 ]
+
 STATE_MAPPING = {
     "unknown": "Unknown",
     "sleep_tracking_started": "Sleep Tracking Started",
@@ -100,7 +104,7 @@ STATE_MAPPING = {
     "sound_event_cough": "Cough Detected",
     "sound_event_baby": "Baby Cry Detected",
     "sound_event_laugh": "Laugh Detected",
-    "alarm_rescheduled": "Alarm Rescheduled"
+    "alarm_rescheduled": "Alarm Rescheduled",
 }
 
 REVERSE_STATE_MAPPING = {v: k for k, v in STATE_MAPPING.items()}
@@ -111,14 +115,15 @@ SLEEP_STAGE_MAPPING = {
     "deep_sleep": "Deep Sleep",
     "light_sleep": "Light Sleep",
     "awake": "Awake",
-    "not_awake": "Not Awake"
+    "not_awake": "Not Awake",
 }
+
 SOUND_MAPPING = {
     'sound_event_snore': "Snore Detected",
     'sound_event_talk': "Talk Detected",
     'sound_event_cough': "Cough Detected",
     'sound_event_baby': "Baby Cry Detected",
-    'sound_event_laugh': "Laugh Detected"
+    'sound_event_laugh': "Laugh Detected",
 }
 
 LULLABY_MAPPING = {
@@ -129,7 +134,7 @@ LULLABY_MAPPING = {
 
 DISTURBANCE_MAPPING = {
     'apnea_alarm': "Apnea Alarm",
-    'antisnoring': "Antisnoring"
+    'antisnoring': "Antisnoring",
 }
 
 ALARM_EVENT_MAPPING = {
@@ -143,12 +148,12 @@ ALARM_EVENT_MAPPING = {
     'show_skip_next_alarm': "Show Skip Next Alarm",
     'smart_period': "Smart Period",
     'before_smart_period': "Before Smart Period",
-    "alarm_rescheduled": "Alarm Rescheduled"
+    "alarm_rescheduled": "Alarm Rescheduled",
 }
 
 SLEEP_TRACKING_MAPPING = {
     'sleep_tracking_started': "Sleep Tracking Started",
     'sleep_tracking_stopped': "Sleep Tracking Stopped",
     'sleep_tracking_paused': "Sleep Tracking Paused",
-    'sleep_tracking_resumed': "Sleep Tracking Resumed"
+    'sleep_tracking_resumed': "Sleep Tracking Resumed",
 }

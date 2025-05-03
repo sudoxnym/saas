@@ -4,7 +4,6 @@ from .const import (
     DOMAIN,
     CONF_NAME,
     CONF_TOPIC,
-    CONF_QOS,
     AVAILABLE_STATES,
     CONF_AWAKE_DURATION,
     CONF_SLEEP_DURATION,
@@ -17,129 +16,169 @@ from .const import (
     CONF_NOTIFY_TARGET,
 )
 from homeassistant import config_entries
-from homeassistant.core import callback
-from voluptuous import Schema, Required, In, Optional
+from voluptuous import Schema, Required, Optional, In
 from homeassistant.helpers import config_validation as cv
 
 _LOGGER = logging.getLogger(__name__)
 
+
 class MyConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
-    """Handle a config flow for SAAS."""
+    """Handle the initial config flow for SAAS."""
     VERSION = 2
     CONNECTION_CLASS = config_entries.CONN_CLASS_LOCAL_PUSH
 
     async def async_step_user(self, user_input=None):
-        """Handle the initial step."""
+        """Initial setup step."""
         errors = {}
 
-        # Build notify targets list
+        # discover available mobile_app notify services
         notify_services = self.hass.services.async_services().get("notify", {})
         notify_targets = {
-            key.replace("mobile_app_", "").title(): key
-            for key in notify_services.keys()
-            if key.startswith("mobile_app_")
+            svc.replace("mobile_app_", "")
+               .replace("_", " ")
+               .lower(): svc
+            for svc in notify_services
+            if svc.startswith("mobile_app_")
         }
 
         if user_input is not None:
-            # Map back the chosen label to service name
-            if user_input.get(CONF_NOTIFY_TARGET):
-                user_input[CONF_NOTIFY_TARGET] = notify_targets.get(user_input[CONF_NOTIFY_TARGET])
+            # map chosen label back to service name, or remove if invalid
+            nt_label = user_input.get(CONF_NOTIFY_TARGET)
+            if nt_label in notify_targets:
+                user_input[CONF_NOTIFY_TARGET] = notify_targets[nt_label]
+            else:
+                user_input.pop(CONF_NOTIFY_TARGET, None)
+
+            # basic validation
             if not user_input.get(CONF_NAME):
                 errors[CONF_NAME] = "required"
+
             if not errors:
-                return self.async_create_entry(title=user_input[CONF_NAME], data=user_input)
+                return self.async_create_entry(
+                    title=user_input[CONF_NAME],
+                    data=user_input
+                )
+
+        # build initial form schema
+        schema = {
+            Required(CONF_NAME): str,
+            Required(CONF_TOPIC): str,
+            Required(CONF_AWAKE_DURATION, default=DEFAULT_AWAKE_DURATION): int,
+            Required(CONF_SLEEP_DURATION, default=DEFAULT_SLEEP_DURATION): int,
+            Required(
+                CONF_AWAKE_STATES, default=DEFAULT_AWAKE_STATES
+            ): cv.multi_select(AVAILABLE_STATES),
+            Required(
+                CONF_SLEEP_STATES, default=DEFAULT_SLEEP_STATES
+            ): cv.multi_select(AVAILABLE_STATES),
+        }
+        if notify_targets:
+            # truly optional, only real targets, no blank choice
+            schema[Optional(CONF_NOTIFY_TARGET)] = In(list(notify_targets.keys()))
 
         return self.async_show_form(
             step_id="user",
-            data_schema=Schema(
-                {
-                    Required(CONF_NAME): str,
-                    Required(CONF_TOPIC): str,
-                    Required(CONF_QOS, default=0): In([0, 1, 2]),
-                    Required(CONF_AWAKE_DURATION, default=DEFAULT_AWAKE_DURATION): int,
-                    Required(CONF_SLEEP_DURATION, default=DEFAULT_SLEEP_DURATION): int,
-                    Required(CONF_AWAKE_STATES, default=DEFAULT_AWAKE_STATES): cv.multi_select(AVAILABLE_STATES),
-                    Required(CONF_SLEEP_STATES, default=DEFAULT_SLEEP_STATES): cv.multi_select(AVAILABLE_STATES),
-                    Optional(CONF_NOTIFY_TARGET): vol.In(list(notify_targets.keys())),
-                }
-            ),
+            data_schema=Schema(schema),
             errors=errors,
         )
 
-    async def async_migrate_entry(self, hass, entry):
-        """Migrate old config entries to the new schema."""
-        _LOGGER.debug("Migrating config entry %s from version %s", entry.entry_id, entry.version)
-        data = {**entry.data}
-        options = {**entry.options}
-
-        # If you renamed keys in entry.data/options, do it here when entry.version == 1
-        # e.g.:
-        # if entry.version == 1:
-        #     data["topic_template"] = data.pop("topic")
-        #     entry.version = 2
-
-        # For no data changes, just bump the version:
-        entry.version = self.VERSION
-        hass.config_entries.async_update_entry(entry, data=data, options=options)
-        _LOGGER.info("Migrated config entry %s to version %s", entry.entry_id, entry.version)
-        return True
-
     @staticmethod
-    @callback
+    @config_entries.callback
     def async_get_options_flow(entry):
-        """Get the options flow handler."""
+        """Return options flow handler."""
         return OptionsFlowHandler(entry)
 
 
 class OptionsFlowHandler(config_entries.OptionsFlow):
-    """Handle SAAS options."""
+    """Handle SAAS options editing."""
 
     def __init__(self, entry):
-        """Initialize options flow."""
         super().__init__()
-        self._config_entry = entry  # use private attribute
+        self._config_entry = entry
 
     async def async_step_init(self, user_input=None):
-        """Manage the options."""
-        # Load current options or fall back to data
-        current = self._config_entry.options.copy()
-        for key in [
-            CONF_NAME,
-            CONF_TOPIC,
-            CONF_QOS,
-            CONF_AWAKE_DURATION,
-            CONF_SLEEP_DURATION,
-            CONF_AWAKE_STATES,
-            CONF_SLEEP_STATES,
-            CONF_NOTIFY_TARGET,
-        ]:
-            if key not in current and key in self._config_entry.data:
-                current[key] = self._config_entry.data[key]
+        """Manage the options form (edit)."""
+        current = dict(self._config_entry.data)
 
-        # Build notify targets list
+        # discover mobile_app notify services again
         notify_services = self.hass.services.async_services().get("notify", {})
         notify_targets = {
-            key.replace("mobile_app_", "").title(): key
-            for key in notify_services.keys()
-            if key.startswith("mobile_app_")
+            svc.replace("mobile_app_", "")
+               .replace("_", " ")
+               .lower(): svc
+            for svc in notify_services
+            if svc.startswith("mobile_app_")
         }
+        # reverse map for defaults
+        reverse_map = {v: k for k, v in notify_targets.items()}
 
         if user_input is not None:
-            return self.async_create_entry(title="", data=user_input)
+            new_data = current.copy()
+
+            # standard fields
+            for key in (
+                CONF_NAME,
+                CONF_TOPIC,
+                CONF_AWAKE_DURATION,
+                CONF_SLEEP_DURATION,
+                CONF_AWAKE_STATES,
+                CONF_SLEEP_STATES,
+            ):
+                if key in user_input:
+                    new_data[key] = user_input[key]
+
+            # handle notify_target with "no mobile" option
+            sel = user_input.get(CONF_NOTIFY_TARGET)
+            if sel == "no mobile":
+                new_data.pop(CONF_NOTIFY_TARGET, None)
+            elif sel in notify_targets:
+                new_data[CONF_NOTIFY_TARGET] = notify_targets[sel]
+
+            # persist back into entry.data and reload
+            self.hass.config_entries.async_update_entry(
+                self._config_entry,
+                data=new_data,
+            )
+            await self.hass.config_entries.async_reload(self._config_entry.entry_id)
+
+            return self.async_create_entry(title="", data=None)
+
+        # build edit form schema with defaults
+        schema = {
+            Required(
+                CONF_NAME, default=current.get(CONF_NAME, "")
+            ): str,
+            Required(
+                CONF_TOPIC, default=current.get(CONF_TOPIC, "")
+            ): str,
+            Required(
+                CONF_AWAKE_DURATION,
+                default=current.get(CONF_AWAKE_DURATION, DEFAULT_AWAKE_DURATION),
+            ): int,
+            Required(
+                CONF_SLEEP_DURATION,
+                default=current.get(CONF_SLEEP_DURATION, DEFAULT_SLEEP_DURATION),
+            ): int,
+            Required(
+                CONF_AWAKE_STATES,
+                default=current.get(CONF_AWAKE_STATES, DEFAULT_AWAKE_STATES),
+            ): cv.multi_select(AVAILABLE_STATES),
+            Required(
+                CONF_SLEEP_STATES,
+                default=current.get(CONF_SLEEP_STATES, DEFAULT_SLEEP_STATES),
+            ): cv.multi_select(AVAILABLE_STATES),
+        }
+
+        if notify_targets:
+            # prepend "no mobile", then all real targets, all lowercase with spaces
+            labels = ["no mobile"] + list(notify_targets.keys())
+            default_label = reverse_map.get(
+                current.get(CONF_NOTIFY_TARGET), "no mobile"
+            )
+            schema[Optional(CONF_NOTIFY_TARGET, default=default_label)] = In(labels)
 
         return self.async_show_form(
             step_id="init",
-            data_schema=vol.Schema(
-                {
-                    Required(CONF_NAME, default=current.get(CONF_NAME, "")): str,
-                    Required(CONF_TOPIC, default=current.get(CONF_TOPIC, "")): str,
-                    Required(CONF_QOS, default=current.get(CONF_QOS, 0)): In([0, 1, 2]),
-                    Required(CONF_AWAKE_DURATION, default=current.get(CONF_AWAKE_DURATION, DEFAULT_AWAKE_DURATION)): int,
-                    Required(CONF_SLEEP_DURATION, default=current.get(CONF_SLEEP_DURATION, DEFAULT_SLEEP_DURATION)): int,
-                    Required(CONF_AWAKE_STATES, default=current.get(CONF_AWAKE_STATES, DEFAULT_AWAKE_STATES)): cv.multi_select(AVAILABLE_STATES),
-                    Required(CONF_SLEEP_STATES, default=current.get(CONF_SLEEP_STATES, DEFAULT_SLEEP_STATES)): cv.multi_select(AVAILABLE_STATES),
-                    Optional(CONF_NOTIFY_TARGET, default=current.get(CONF_NOTIFY_TARGET, "")): vol.In(list(notify_targets.keys())),
-                }
-            ),
+            data_schema=Schema(schema),
             errors={},
         )

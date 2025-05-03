@@ -170,6 +170,12 @@ sqlite3 origin_db_1234567890 "SELECT AUTHKEY FROM DEVICE;"
 
 <details>
   <summary><strong>📦 changes</strong></summary>
+  <b>0.2.1</b>
+  <ul>
+    <li>fixed manifest error preventing config setup</li>
+    <li>fixed fine tuning in the configure section, now changing time or device actually works</li>
+  </ul>
+
   <b>0.2.0</b>
   <ul>
     <li>added services.yaml to resolve known NoneType error</li>

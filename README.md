@@ -6,7 +6,7 @@
 
 <h1>🌙 saas - Sleep As Android status</h1>
 
-<h2>🚨 breaking changes 🚨</h2>  
+<h2>🚨 0.2.0 breaking changes 🚨</h2>  
 due to changes in **Home Assistant** 2025.12, you **must** remove your existing **SAAS** integration entries and re-add them after updating to this version.
 
 ---

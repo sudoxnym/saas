@@ -39,7 +39,7 @@ sleep as android status is my solution for wake/sleep state within HA. it listen
   </li>
   <li>
     <details>
-      <summary><strong>🎛️ 8 buttons</strong></summary>
+      <summary><strong>🎛️ 8 buttons *only if mobile_app selected</strong></summary>
       <ul>
         <li>alarm dismiss</li>
         <li>alarm snooze</li>
@@ -99,13 +99,12 @@ data:
 <h2>⚙️ configuration:</h2>
 <ul>
   <li>name: name of user</li>
-  <li>topic: MQTT topic from Sleep As Android</li>
-  <li>qos: quality of service</li>
+  <li>topic: MQTT topic from Sleep As Android *MUST MATCH*</li>
   <li>awake duration: time in seconds in which awake states = true to indicate awake. <b>fixed</b></li>
   <li>asleep duration: time in seconds in which sleep states = true to indicate asleep. <b>fixed</b></li>
   <li>awake states: states to indicate being awake</li>
   <li>asleep states: states to indicate being asleep</li>
-  <li>mobile app: target for buttons <b>requires companion app</b></li>
+  <li>mobile app: target for buttons <b>requires companion app *OPTIONAL: REQUIRES COMPANION APP*</b></li>
 </ul>
 
 <details>

@@ -16,8 +16,6 @@ due to changes in **Home Assistant** 2025.12, you **must** remove your existing 
 sleep as android status is my solution for wake/sleep state within HA. it listens for the Sleep As Android MQTT messages, so it does require being on the same network. as of 0.0.4, buttons that link with the companion app have been added.
 </p>
 
-<h4>💡 this integration works best with a **Xiaomi Mi Band** (7 or older) mixed with the notify app and Sleep As Android configured.</h4>
-
 <h3>🧱 this integration will create:</h3>
 
 <ul>
@@ -79,7 +77,7 @@ data:
     <li>📟 **Xiaomi Mi Band 7**</li>
     <li>📟 **Xiaomi Mi Band 8** and **Mi Band 9** may work, but they have a different os that jumps through hoops to work.</li>
     <li>⌚ **Garmin Fenix 7X** with garmin alternative, **not** the free one.</li>
-    <li>⌚ **Xiaomi Amazfit GTR Mini** — may require root. i am rooted so i just did what's in this guide, but there may be alternative ways to get the key.</li>
+    <li>⌚ **Xiaomi Amazfit GTR3 Pro** — may require root. i am rooted so i just did what's in this guide, but there may be alternative ways to get the key.</li>
   </ul>
 </details>
 

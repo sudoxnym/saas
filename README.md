@@ -22,18 +22,20 @@ sleep as android status is my solution for wake/sleep state within HA. it listen
   <li>
     <details>
       <summary><strong>📡 9 sensors</strong></summary>
-      <ul>
-        <li>message received *state*</li>
-        <li>wake status</li>
-        <li>sound</li>
-        <li>disturbance</li>
-        <li>next alarm</li>
-        <li>alarm</li>
-        <li>lullaby</li>
-        <li>sleep tracking</li>
-        <li>sleep stage</li>
-      </ul>
-      <p>this should intelligently and dynamically allow for state changes in the wake status sensor.</p>
+
+| Sensor | Description |
+| ------ | ----------- |
+| message received | shows the last raw MQTT event payload |
+| wake status | indicates awake or asleep based on your sleep stage |
+| sound | snore, talk, cough, and other sound events |
+| disturbance | reports apnea and antisnoring events |
+| **next alarm** | upcoming alarm time and label; stores the last ten alarms in attributes |
+| alarm | alarm related events such as snooze or dismiss |
+| lullaby | lullaby status |
+| sleep tracking | whether sleep tracking is active or paused |
+| sleep stage | current sleep stage from Sleep As Android |
+
+      <p>the wake status sensor adjusts automatically based on the defined awake and asleep states.</p>
     </details>
   </li>
   <li>
@@ -168,6 +170,11 @@ sqlite3 origin_db_1234567890 "SELECT AUTHKEY FROM DEVICE;"
 
 <details>
   <summary><strong>📦 changes</strong></summary>
+  <b>0.2.2</b>
+  <ul>
+    <li>added Next Alarm sensor with alarm label tracking</li>
+    <li>stores up to ten previous alarms in sensor attributes</li>
+  </ul>
   <b>0.2.1</b>
   <ul>
     <li>fixed manifest error preventing config setup</li>

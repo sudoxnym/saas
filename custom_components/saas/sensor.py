@@ -219,6 +219,64 @@ class SAASAlarmEventSensor(RestoreEntity):
         _LOGGER.debug(f"{datetime.now().strftime('%H:%M:%S:%f')} (Line {inspect.currentframe().f_lineno}): Set state to 'None' due to timeout for sensor {self.name}")
         self.async_schedule_update_ha_state()
 
+class SAASNextAlarmSensor(RestoreEntity):
+    """Sensor that exposes the next scheduled alarm time and label."""
+
+    def __init__(self, hass, name, entry_id):
+        self._hass = hass
+        self._name = name
+        self.entry_id = entry_id
+        self._state = None
+        self._label = None
+
+    @property
+    def unique_id(self):
+        return f"saas_next_alarm_{self._name}"
+
+    @property
+    def name(self):
+        return f"SAAS {self._name} Next Alarm"
+
+    @property
+    def state(self):
+        return self._state
+
+    @property
+    def extra_state_attributes(self):
+        return {"Label": self._label} if self._label else {}
+
+    async def async_added_to_hass(self):
+        await super().async_added_to_hass()
+
+        state = await self.async_get_last_state()
+        if state:
+            self._state = state.state
+            self._label = state.attributes.get("Label")
+
+        async def message_received(msg):
+            msg_json = json.loads(msg.payload)
+            event = msg_json.get("event")
+            if event != "alarm_rescheduled":
+                return
+
+            value1 = msg_json.get("value1")
+            value2 = msg_json.get("value2")
+            if value1:
+                timestamp = int(value1) / 1000.0
+                dt = dt_util.as_local(datetime.fromtimestamp(timestamp))
+                self._state = dt.strftime("%Y-%m-%d %H:%M")
+            else:
+                self._state = None
+
+            self._label = value2
+            self.async_schedule_update_ha_state()
+
+        await async_subscribe(
+            self._hass,
+            self._hass.data[DOMAIN][self.entry_id][CONF_TOPIC],
+            message_received,
+        )
+
 class SAASSoundSensor(RestoreEntity):
     """Representation of a SAAS - Sleep As Android Stats sensor for Sound Events."""
 
@@ -820,6 +878,7 @@ async def async_setup_entry(hass, entry, async_add_entities):
     entities = [
         SAASSensor(hass, name, STATE_MAPPING, entry_id),
         SAASAlarmEventSensor(hass, name, ALARM_EVENT_MAPPING, entry_id),
+        SAASNextAlarmSensor(hass, name, entry_id),
         SAASSoundSensor(hass, name, SOUND_MAPPING, entry_id),
         SAASSleepTrackingSensor(hass, name, SLEEP_TRACKING_MAPPING, entry_id), 
         SAASDisturbanceSensor(hass, name, DISTURBANCE_MAPPING, entry_id),

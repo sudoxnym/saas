@@ -242,6 +242,16 @@ class SAASNextAlarmSensor(RestoreEntity):
         return self._state
 
     @property
+    def device_info(self):
+        """Return information about the device."""
+        return {
+            "identifiers": {(DOMAIN, self._name)},
+            "name": self._name,
+            "manufacturer": INTEGRATION_NAME,
+            "model": MODEL,
+        }
+
+    @property
     def extra_state_attributes(self):
         return {"Label": self._label} if self._label else {}
 
@@ -275,6 +285,13 @@ class SAASNextAlarmSensor(RestoreEntity):
             self._hass,
             self._hass.data[DOMAIN][self.entry_id][CONF_TOPIC],
             message_received,
+        )
+
+    async def async_will_remove_from_hass(self):
+        """Run when entity will be removed from hass."""
+        self.hass.states.async_set(self.entity_id, self._state)
+        _LOGGER.info(
+            f"{datetime.now().strftime('%H:%M:%S:%f')} (Line {inspect.currentframe().f_lineno}): Saved state: {self._state} for sensor {self.name}"
         )
 
 class SAASSoundSensor(RestoreEntity):

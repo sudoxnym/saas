@@ -219,6 +219,120 @@ class SAASAlarmEventSensor(RestoreEntity):
         _LOGGER.debug(f"{datetime.now().strftime('%H:%M:%S:%f')} (Line {inspect.currentframe().f_lineno}): Set state to 'None' due to timeout for sensor {self.name}")
         self.async_schedule_update_ha_state()
 
+class SAASNextAlarmSensor(RestoreEntity):
+    """Sensor that exposes the next scheduled alarm time and label."""
+
+    def __init__(self, hass, name, entry_id):
+        self._hass = hass
+        self._name = name
+        self.entry_id = entry_id
+        self._state = None
+        self._label = None
+        self._alarms = []
+
+    @property
+    def unique_id(self):
+        return f"saas_next_alarm_{self._name}"
+
+    @property
+    def name(self):
+        return f"SAAS {self._name} Next Alarm"
+
+    @property
+    def state(self):
+        return self._state
+
+    @property
+    def device_info(self):
+        """Return information about the device."""
+        return {
+            "identifiers": {(DOMAIN, self._name)},
+            "name": self._name,
+            "manufacturer": INTEGRATION_NAME,
+            "model": MODEL,
+        }
+
+    @property
+    def extra_state_attributes(self):
+        attrs = {}
+        if self._label:
+            attrs["Label"] = self._label
+        if self._alarms:
+            attrs["Alarms"] = self._alarms
+        return attrs
+
+    async def async_added_to_hass(self):
+        await super().async_added_to_hass()
+
+        state = await self.async_get_last_state()
+        if state:
+            self._state = state.state if state.state != "None" else None
+            self._label = state.attributes.get("Label")
+            saved = state.attributes.get("Alarms")
+            if isinstance(saved, list):
+                self._alarms = saved
+
+        async def message_received(msg):
+            msg_json = json.loads(msg.payload)
+            event = msg_json.get("event")
+            value1 = msg_json.get("value1")
+            value2 = msg_json.get("value2")
+
+            if event == "alarm_rescheduled":
+                if value1:
+                    ts = int(value1) / 1000.0
+                    dt = dt_util.as_local(datetime.fromtimestamp(ts))
+                    epoch = dt.timestamp()
+                    found = False
+                    for alarm in self._alarms:
+                        if alarm["timestamp"] == epoch:
+                            alarm["label"] = value2
+                            found = True
+                            break
+                    if not found:
+                        self._alarms.append({"timestamp": epoch, "label": value2})
+                        self._alarms.sort(key=lambda x: x["timestamp"])
+                        self._alarms = self._alarms[:10]
+
+            elif event in ("alarm_alert_dismiss", "alarm_skip_next"):
+                if value1:
+                    ts = int(value1) / 1000.0
+                    dt = dt_util.as_local(datetime.fromtimestamp(ts))
+                    epoch = dt.timestamp()
+                    self._alarms = [a for a in self._alarms if a["timestamp"] != epoch]
+                elif self._alarms:
+                    self._alarms.pop(0)
+            else:
+                return
+
+            if self._alarms:
+                next_alarm = self._alarms[0]
+                dt = dt_util.as_local(datetime.fromtimestamp(next_alarm["timestamp"]))
+                self._state = dt.strftime("%Y-%m-%d %H:%M")
+                self._label = next_alarm.get("label")
+            else:
+                self._state = None
+                self._label = None
+
+            self.async_schedule_update_ha_state()
+
+        await async_subscribe(
+            self._hass,
+            self._hass.data[DOMAIN][self.entry_id][CONF_TOPIC],
+            message_received,
+        )
+
+    async def async_will_remove_from_hass(self):
+        """Run when entity will be removed from hass."""
+        self.hass.states.async_set(
+            self.entity_id,
+            self._state,
+            {"Label": self._label, "Alarms": self._alarms},
+        )
+        _LOGGER.info(
+            f"{datetime.now().strftime('%H:%M:%S:%f')} (Line {inspect.currentframe().f_lineno}): Saved state: {self._state} for sensor {self.name}"
+        )
+
 class SAASSoundSensor(RestoreEntity):
     """Representation of a SAAS - Sleep As Android Stats sensor for Sound Events."""
 
@@ -820,6 +934,7 @@ async def async_setup_entry(hass, entry, async_add_entities):
     entities = [
         SAASSensor(hass, name, STATE_MAPPING, entry_id),
         SAASAlarmEventSensor(hass, name, ALARM_EVENT_MAPPING, entry_id),
+        SAASNextAlarmSensor(hass, name, entry_id),
         SAASSoundSensor(hass, name, SOUND_MAPPING, entry_id),
         SAASSleepTrackingSensor(hass, name, SLEEP_TRACKING_MAPPING, entry_id), 
         SAASDisturbanceSensor(hass, name, DISTURBANCE_MAPPING, entry_id),

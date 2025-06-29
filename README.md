@@ -21,12 +21,13 @@ sleep as android status is my solution for wake/sleep state within HA. it listen
 <ul>
   <li>
     <details>
-      <summary><strong>📡 8 sensors</strong></summary>
+      <summary><strong>📡 9 sensors</strong></summary>
       <ul>
         <li>message received *state*</li>
         <li>wake status</li>
         <li>sound</li>
         <li>disturbance</li>
+        <li>next alarm (tracks up to 10 scheduled alarms and shows the soonest with its label)</li>
         <li>alarm</li>
         <li>lullaby</li>
         <li>sleep tracking</li>

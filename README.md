@@ -1,4 +1,21 @@
 <p align="center">
+  <img src="https://img.shields.io/badge/⚠️_DEPRECATED-red?style=for-the-badge" alt="deprecated">
+</p>
+
+# ⚠️ THIS PROJECT HAS BEEN DEPRECATED
+
+**this project has been rebranded and moved to [sleepd](https://github.com/sudoxnym/sleepd)**
+
+please use the new repository for future updates and support.
+
+[![go to sleepd](https://img.shields.io/badge/GO_TO_SLEEPD-blue?style=for-the-badge&logo=github)](https://github.com/sudoxnym/sleepd)
+
+---
+
+<details>
+<summary>original readme (archived)</summary>
+
+<p align="center">
   <a href="https://hacs.xyz/docs/faq/custom_repositories">
     <img src="https://img.shields.io/badge/HACS-Custom-orange.svg?style=for-the-badge&logo=home%20assistant&labelColor=202020&color=41BDF5" alt="add to hacs">
   </a>
@@ -207,4 +224,5 @@ sqlite3 origin_db_1234567890 "SELECT AUTHKEY FROM DEVICE;"
 <details>
   <summary><strong>🚨 known issues</strong></summary>
   <p>💬 no known issues at this time.</p>
+</details>
 </details>
